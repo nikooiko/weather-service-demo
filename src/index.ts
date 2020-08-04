@@ -1,5 +1,6 @@
 import {logger} from './logger';
-import {Locations} from './weather-service';
+import {Locations} from './weather/weather-service';
+import 'reflect-metadata';
 
 export function parseArgs(): string[] {
   // extract raw locations (city names, zip codes) from process arguments

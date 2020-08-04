@@ -1,4 +1,7 @@
 import axios, {AxiosInstance} from 'axios';
+import {validate, validateOrReject} from 'class-validator';
+import {logger} from '../logger';
+import {WeatherDto} from './weather.dto';
 
 export interface Locations {
   cities?: string[];
@@ -39,7 +42,21 @@ export class WeatherService {
   }
 
   async getCurrent(params: ReqParams): Promise<Weather | null> {
-    const {data} = await this.instance.get('weather', {params});
+    let data;
+    try {
+      const res = await this.instance.get('weather', {params});
+      data = res.data;
+      const dto = new WeatherDto();
+      Object.assign(dto, data);
+      await validateOrReject(dto);
+    } catch (err) {
+      logger.error('Error with current weather request', {
+        type: 'CURRENT_REQ_ERROR',
+        err,
+        params,
+      });
+      return null;
+    }
     const {
       coord,
       name,

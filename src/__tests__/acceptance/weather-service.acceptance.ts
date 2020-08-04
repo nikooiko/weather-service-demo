@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {WeatherService} from '../../weather-service';
+import {WeatherService} from '../../weather/weather-service';
 import nock from 'nock';
 import {URLSearchParams} from 'url';
 
@@ -61,7 +61,7 @@ describe('Testing Weather Service', () => {
           name: 'cityRes',
           weather: [{main: 'clear'}],
           wind: {speed: 0.5, deg: 100},
-          // missing some properties (e.g. city, location)
+          // missing some properties (e.g. conditions, location)
         });
       nock(weatherService.BASE_URL);
       const res = await weatherService.getCurrent({q: cityName});

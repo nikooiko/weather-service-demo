@@ -7,6 +7,20 @@
       "name": "app:debug",
       "preLaunchTask": "Rebuild App",
       "program": "${workspaceFolder}/build/index.js"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "app:tests:debug",
+      "preLaunchTask": "Rebuild App",
+      "program": "${workspaceRoot}/node_modules/.bin/mocha",
+      "args": [
+        "--require",
+        "build/__tests__/setup.js",
+        "build/__tests__/**/*.js",
+        "--inspect"
+      ],
+      "autoAttachChildProcesses": true
     }
   ]
 }
