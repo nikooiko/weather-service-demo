@@ -1,6 +1,6 @@
-import {logger} from './logger';
-import {Locations} from './weather/weather-service';
 import 'reflect-metadata';
+import {logger} from './logger';
+import {Locations, WeatherService} from './weather/weather-service';
 
 export function parseArgs(): string[] {
   // extract raw locations (city names, zip codes) from process arguments
@@ -35,6 +35,17 @@ export function convertRawLocations(rawLocations: string[]): Locations {
   return locations;
 }
 
+async function getWeatherForLocations(locations: Locations): Promise<void> {
+  const weatherService = new WeatherService();
+  const weatherResults = await weatherService.getCurrentByLocations(locations);
+  // null entries indicate that the service failed to retrieve weather for the corresponding location
+  logger.info('Locations weather', {
+    type: 'LOCATIONS_WEATHER_RESULT',
+    weatherResults,
+  });
+}
+
 if (require.main === module) {
-  convertRawLocations(parseArgs());
+  const locations: Locations = convertRawLocations(parseArgs());
+  getWeatherForLocations(locations);
 }
