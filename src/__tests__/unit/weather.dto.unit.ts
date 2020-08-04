@@ -1,10 +1,10 @@
-import {WeatherDto} from '../../weather/weather.dto';
-import {transformAndValidate} from 'class-transformer-validator';
+import {WeatherDto} from '../../weather/weather.dto'
+import {transformAndValidate} from 'class-transformer-validator'
 
 describe('Testing Weather Dto', () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   async function validate(data: any): Promise<void> {
-    await transformAndValidate(WeatherDto, data);
+    await transformAndValidate(WeatherDto, data)
   }
   it('should accept valid data', async () => {
     await validate({
@@ -13,8 +13,8 @@ describe('Testing Weather Dto', () => {
       weather: [{main: 'clear'}],
       main: {temp: 20, humidity: 60},
       wind: {speed: 0.5, deg: 100},
-    });
-  });
+    })
+  })
   it('should deny invalid coord', async () => {
     return Promise.all([
       validate({
@@ -52,8 +52,8 @@ describe('Testing Weather Dto', () => {
         main: {temp: 20, humidity: 60},
         wind: {speed: 0.5, deg: 100},
       }).should.be.rejected,
-    ]);
-  });
+    ])
+  })
   it('should deny invalid name', async () => {
     return Promise.all([
       validate({
@@ -70,8 +70,8 @@ describe('Testing Weather Dto', () => {
         main: {temp: 20, humidity: 60},
         wind: {speed: 0.5, deg: 100},
       }).should.be.rejected,
-    ]);
-  });
+    ])
+  })
   it('should deny invalid weatherObj', async () => {
     return Promise.all([
       validate({
@@ -95,8 +95,8 @@ describe('Testing Weather Dto', () => {
         main: {temp: 20, humidity: 60},
         wind: {speed: 0.5, deg: 100},
       }).should.be.rejected,
-    ]);
-  });
+    ])
+  })
   it('should deny invalid conditions', async () => {
     return Promise.all([
       validate({
@@ -134,8 +134,8 @@ describe('Testing Weather Dto', () => {
         main: {temp: 20, humidity: 'invalid'},
         wind: {speed: 0.5, deg: 100},
       }).should.be.rejected,
-    ]);
-  });
+    ])
+  })
   it('should deny invalid wind', async () => {
     return Promise.all([
       validate({
@@ -173,6 +173,6 @@ describe('Testing Weather Dto', () => {
         main: {temp: 20, humidity: 60},
         wind: {speed: 0.5, deg: 'invalid'},
       }).should.be.rejected,
-    ]);
-  });
-});
+    ])
+  })
+})

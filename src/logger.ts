@@ -1,4 +1,4 @@
-import winston from 'winston';
+import winston from 'winston'
 export const logger = winston.createLogger({
   level: 'debug',
   format: winston.format.json(),
@@ -11,4 +11,4 @@ export const logger = winston.createLogger({
       ),
     }),
   ],
-});
+})

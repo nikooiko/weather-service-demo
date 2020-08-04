@@ -1,16 +1,16 @@
-import {expect} from 'chai';
-import {WeatherService} from '../../weather/weather-service';
-import nock from 'nock';
-import {URLSearchParams} from 'url';
+import {expect} from 'chai'
+import {WeatherService} from '../../weather/weather-service'
+import nock from 'nock'
+import {URLSearchParams} from 'url'
 
 describe('Testing Weather Service', () => {
   describe('Testing getCurrent', () => {
-    const weatherService = new WeatherService('testApiKey');
+    const weatherService = new WeatherService('testApiKey')
     afterEach(() => {
-      nock.cleanAll();
-    });
+      nock.cleanAll()
+    })
     it('should retrieve weather', async () => {
-      const cityName = 'city';
+      const cityName = 'city'
       nock(weatherService.BASE_URL)
         .get('/weather')
         .query(
@@ -25,8 +25,8 @@ describe('Testing Weather Service', () => {
           weather: [{main: 'clear'}],
           main: {temp: 20, humidity: 60},
           wind: {speed: 0.5, deg: 100},
-        });
-      const res = await weatherService.getCurrent({q: cityName});
+        })
+      const res = await weatherService.getCurrent({q: cityName})
       expect(res).to.eql({
         location: {
           lat: 1,
@@ -40,10 +40,10 @@ describe('Testing Weather Service', () => {
           speed: 0.5,
           degrees: 100,
         },
-      });
-    });
+      })
+    })
     it('should handle request errors', async () => {
-      const cityName = 'city';
+      const cityName = 'city'
       nock(weatherService.BASE_URL)
         .get('/weather')
         .query(
@@ -52,12 +52,12 @@ describe('Testing Weather Service', () => {
             ...weatherService.instance.defaults.params,
           }),
         )
-        .reply(400);
-      const res = await weatherService.getCurrent({q: cityName});
-      expect(res).to.be.null;
-    });
+        .reply(400)
+      const res = await weatherService.getCurrent({q: cityName})
+      expect(res).to.be.null
+    })
     it('should handle invalid response errors', async () => {
-      const cityName = 'city';
+      const cityName = 'city'
       nock(weatherService.BASE_URL)
         .get('/weather')
         .query(
@@ -71,10 +71,10 @@ describe('Testing Weather Service', () => {
           weather: [{main: 'clear'}],
           wind: {speed: 0.5, deg: 100},
           // missing some properties (e.g. conditions, location)
-        });
-      nock(weatherService.BASE_URL);
-      const res = await weatherService.getCurrent({q: cityName});
-      expect(res).to.be.null;
-    });
-  });
-});
+        })
+      nock(weatherService.BASE_URL)
+      const res = await weatherService.getCurrent({q: cityName})
+      expect(res).to.be.null
+    })
+  })
+})

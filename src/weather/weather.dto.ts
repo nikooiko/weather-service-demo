@@ -5,61 +5,61 @@ import {
   Min,
   Max,
   IsDefined,
-} from 'class-validator';
-import {Type} from 'class-transformer';
+} from 'class-validator'
+import {Type} from 'class-transformer'
 
 class CoordDto {
   @IsNumber()
-  lat: number;
+  lat: number
 
   @IsNumber()
-  lon: number;
+  lon: number
 }
 
 class WeatherObjDto {
   @IsString()
-  main: string;
+  main: string
 }
 
 class ConditionsDto {
   @IsNumber()
-  temp: number;
+  temp: number
 
   @IsNumber()
   @Min(0)
   @Max(100)
-  humidity: number;
+  humidity: number
 }
 
 class WindDto {
   @IsNumber()
-  speed: number;
+  speed: number
 
   @IsNumber()
-  deg: number;
+  deg: number
 }
 
 export class WeatherDto {
   @ValidateNested()
   @IsDefined()
   @Type(() => CoordDto)
-  coord: CoordDto;
+  coord: CoordDto
 
   @IsString()
-  name: string;
+  name: string
 
   @ValidateNested()
   @IsDefined()
   @Type(() => WeatherObjDto)
-  weather: WeatherObjDto[];
+  weather: WeatherObjDto[]
 
   @ValidateNested()
   @IsDefined()
   @Type(() => ConditionsDto)
-  main: ConditionsDto;
+  main: ConditionsDto
 
   @ValidateNested()
   @IsDefined()
   @Type(() => WindDto)
-  wind: WindDto;
+  wind: WindDto
 }
