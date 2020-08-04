@@ -43,8 +43,17 @@ describe('Testing Weather Service', () => {
       });
     });
     it('should handle request errors', async () => {
-      nock(weatherService.BASE_URL);
-      const res = await weatherService.getCurrent({q: 'something'});
+      const cityName = 'city';
+      nock(weatherService.BASE_URL)
+        .get('/weather')
+        .query(
+          new URLSearchParams({
+            q: cityName,
+            ...weatherService.instance.defaults.params,
+          }),
+        )
+        .reply(400);
+      const res = await weatherService.getCurrent({q: cityName});
       expect(res).to.be.null;
     });
     it('should handle invalid response errors', async () => {
