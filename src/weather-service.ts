@@ -38,7 +38,7 @@ export class WeatherService {
     });
   }
 
-  async getCurrent(params: ReqParams): Promise<Weather> {
+  async getCurrent(params: ReqParams): Promise<Weather | null> {
     const {data} = await this.instance.get('weather', {params});
     const {
       coord,
