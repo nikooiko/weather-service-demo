@@ -19,7 +19,7 @@
     "prettier:check": "npm run prettier:cli -- -l",
     "prettier:fix": "npm run prettier:cli -- --write",
     "pretest": "npm run build",
-    "test": "mocha build/**/*.js"
+    "test": "mocha build/__tests__/**/*.js"
   },
   "keywords": [],
   "author": "",
@@ -33,6 +33,7 @@
     "chai": "^4.2.0",
     "eslint": "^7.6.0",
     "mocha": "^8.1.0",
+    "nock": "^13.0.3",
     "prettier": "^2.0.5",
     "typescript": "^3.9.7"
   },

@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {convertRawLocations} from './';
+import {convertRawLocations} from '../..';
 
 describe('Testing index methods', () => {
   describe('Testing convertRawLocations', () => {
