@@ -5,10 +5,10 @@
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "scripts": {
-    "demo": "npm run start -- volos 38446",
+    "demo": "npm run start -- 'New York' 10005",
     "build": "tsc",
     "rebuild": "npm run clean && npm run build",
-    "clean": "rm -rf dist *.tsbuildinfo .eslintcache",
+    "clean": "rm -rf build *.tsbuildinfo .eslintcache",
     "prestart": "npm run build",
     "start": "node .",
     "lint": "npm run prettier:check && npm run eslint",
