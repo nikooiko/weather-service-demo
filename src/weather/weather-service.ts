@@ -77,4 +77,21 @@ export class WeatherService {
     };
     return weather;
   }
+
+  async getCurrentByCity(city: string): Promise<Weather | null> {
+    return this.getCurrent({q: city});
+  }
+
+  async getCurrentByZip(zip: number): Promise<Weather | null> {
+    return this.getCurrent({zip});
+  }
+
+  async getCurrentByLocations(
+    locations: Locations,
+  ): Promise<(Weather | null)[]> {
+    const {zipCodes = [], cities = []} = locations;
+    const citiesReqs = cities.map((city) => this.getCurrentByCity(city));
+    const zipCodesReqs = zipCodes.map((zip) => this.getCurrentByZip(zip));
+    return await Promise.all([...citiesReqs, ...zipCodesReqs]);
+  }
 }
