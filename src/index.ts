@@ -28,7 +28,7 @@ export function convertRawLocations(rawLocations: string[]): Locations {
     },
     {cities: [], zipCodes: []},
   )
-  logger.debug('Will provide weather for locations', {
+  logger.info('Will provide weather for locations', {
     type: 'TARGET_LOCATIONS',
     locations,
   })

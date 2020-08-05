@@ -5,7 +5,7 @@
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "scripts": {
-    "demo": "npm run start -- 'New York' 10005",
+    "demo": "npm run start -- 'New York' 10005 Tokyo 'Sao Paulo' Pluto",
     "build": "tsc",
     "rebuild": "npm run clean && npm run build",
     "clean": "rm -rf build *.tsbuildinfo .eslintcache",
