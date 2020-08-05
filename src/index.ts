@@ -46,6 +46,6 @@ async function getWeatherForLocations(locations: Locations): Promise<void> {
 }
 
 if (require.main === module) {
-  const locations: Locations = convertRawLocations(parseArgs())
+  const locations = convertRawLocations(parseArgs())
   getWeatherForLocations(locations)
 }
